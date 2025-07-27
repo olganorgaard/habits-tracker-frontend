@@ -1,0 +1,41 @@
+.header {
+  width: 100vw;
+  margin-top: 0;
+  margin-left: calc(-50vw + 50%);
+  background-image: url('../img/img1.webp');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: bottom;
+  padding: 60px 20px;
+  color: #333;
+  text-align: center;
+  box-sizing: border-box;
+  
+}
+.header h1 {
+  font-size: 40px;
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+.header p {
+  font-size: 19.2px;
+  color: #ebe6e6;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .header {
+    padding: 40px 16px;
+    background-position: center bottom;
+  }
+  .header h1 {
+    font-size: 28.8px;
+  }
+  .header p {
+    font-size: 16px;
+    padding: 0 10px;
+  }
+}

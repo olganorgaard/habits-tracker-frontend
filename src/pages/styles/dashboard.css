@@ -1,0 +1,149 @@
+/* General Layout */
+.dashboard-container {
+  width: 100%;
+  padding: 0 400px ;
+  font-family: 'Segoe UI', sans-serif;
+   
+  box-sizing: border-box;
+  margin-top: 0;
+}
+
+/* Header */
+.dashboard-header {
+  margin-bottom: 32px;
+  background-color: #f6f8f7;
+  border-radius: 10px;
+  padding-left: 15px;
+  padding-bottom: 5px;
+}
+.dashboard-header h2 {
+  font-size: 32px;
+  font-weight: 700;
+  color: #333;
+}
+.dashboard-header blockquote {
+  font-style: italic;
+  color: #555;
+  border-left: 4px solid #ccc;
+  padding-left: 16px;
+  margin-top: 16px;
+}
+
+/* Form */
+.habit-form {
+  background-color: #fff6dc;
+  border-radius: 10px;
+  padding: 16px;
+  margin-bottom: 24px;
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  align-items: center;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+.habit-form input {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+  flex: 1;
+  min-width: 120px;
+}
+.habit-form button {
+  background-color: #ffc72c;
+  color: #333;
+  border: none;
+  padding: 8px 16px;
+  font-weight: bold;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+.habit-form button:hover {
+  background-color: #e0ac00;
+  transform: scale(1.03);
+}
+.habit-form button:active {
+  transform: scale(0.98);
+}
+
+/* Habits List */
+.habit-list {
+  background-color: #eef3ec;
+  border-radius: 10px;
+  padding: 16px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+.habit-list p {
+  text-align: center;
+  color: #666;
+}
+
+/* Grid layout for habit cards */
+.habit-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 16px;
+}
+.guest-preview {
+  background-color: #fff9e6;
+  padding: 32px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+.benefits-list {
+  list-style: none;
+  padding: 0;
+  margin: 16px 0 32px;
+  font-size: 16px;
+  line-height: 1.6;
+}
+.benefits-list li::before {
+  content: '👉';
+  margin-right: 8px;
+}
+.login-cta-button {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 20px;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-bottom: 32px;
+}
+.login-cta-button:hover {
+  background-color: #45a045;
+}
+.preview-title {
+  margin-bottom: 16px;
+}
+
+/* Mobile Responsive Adjustments */
+@media (max-width: 768px) {
+  .dashboard-container {
+    padding: 16px;
+  }
+  .dashboard-header h2 {
+    font-size: 24px;
+    text-align: center;
+  }
+  .dashboard-header blockquote {
+    font-size: 15.2px;
+    padding-left: 12.8px;
+    margin: 8px auto;
+  }
+  .habit-form {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+  .habit-form input,
+  .habit-form button {
+    width: 100%;
+  }
+  .habit-grid {
+    grid-template-columns: 1fr;
+  }
+}

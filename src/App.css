@@ -1,5 +1,15 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body{
+  margin: 0;
+}
+
 .App {
   text-align: center;
+  font-family: 'Segoe UI', sans-serif;
 }
 
 .App-logo {
@@ -22,17 +32,32 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+  padding: 2rem;
+  text-align: center;
 }
 
 .App-link {
   color: #61dafb;
 }
 
+/* Logo animation */
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
   }
   to {
     transform: rotate(360deg);
+  }
+}
+
+/* Responsive Enhancements */
+@media (max-width: 768px) {
+  .App-header {
+    font-size: calc(9px + 1.8vmin);
+    padding: 1rem;
+  }
+
+  .App-logo {
+    height: 30vmin;
   }
 }
