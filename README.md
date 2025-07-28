@@ -1,70 +1,162 @@
-# Getting Started with Create React App
+# 🧠 Habit Tracker App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+YourHabit is a simple and intuitive habit tracker app that helps you build better routines, stay consistent, and reach your goals. Track daily habits, visualize progress, and stay motivated—all in one clean, easy-to-use dashboard.
+Live Demo 👉 [https://habits-tracker-app.netlify.app](https://habits-tracker-app.netlify.app)
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## 📌 Features
 
-### `npm start`
+- ✅ User authentication (Auth0)
+- 📊 Dashboard to manage daily habits
+- ✏️ Create, edit, delete habits
+- 🟢 Mark habits as complete
+- 🔐 Private data per authenticated user
+- 🌐 Deployed Frontend (Netlify) + Backend (Render)
+- ☁️ MongoDB database for persistence
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+---
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 🛠 Tech Stack
 
-### `npm test`
+| Frontend                     | Backend                    |
+|-----------------------------|----------------------------|
+| React + React Router        | Node.js + Express          |
+| Auth0 (Authentication)      | MongoDB (via Mongoose)     |
+| Netlify (Hosting)           | Render (API Hosting)       |
+| Responsive CSS / Flexbox    | Auth0 JWT Middleware       |
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+---
 
-### `npm run build`
+## 🚀 Getting Started 
+**1. Clone the Repo**
+- Backend
+   ```bash
+   https://github.com/olganorgaard/habits-tracker-backend
+  ```
+- Frontend
+   ```bash
+   https://github.com/olganorgaard/habits-tracker-frontend
+   cd habit-tracker
+  ```
+  
+**2. Setup Frontend**
+   ```bash
+   cd frontend
+   npm install
+   ```
+Create .env in frontend/:
+  ```bash
+  REACT_APP_AUTH0_DOMAIN=your-auth0-domain
+  REACT_APP_AUTH0_CLIENT_ID=your-auth0-client-id
+  REACT_APP_API_URL=https://your-render-backend-url/habits
+  REACT_APP_AUTH0_AUDIENCE=https://your-auth0-api-audience
+  REACT_APP_AUTH0_REDIRECT_URI=https://your-netlify-url/callback
+  ```
+Then run:
+  ```bash
+  npm start
+  ```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+**3. Setup Backend**
+   ```bash
+   cd ../backend
+   npm install
+   ```
+Create .env in backend/:
+ ```bash
+MONGODB_LINK = your-mongodb-connection-string
+AUTH0_SECRET= your-auth0-secret-value
+AUTH0_CLIENT_ID=your0auth0-client-id
+AUTH0_DOMAIN=https://your-auth0-domain
+AUTH0_AUDIENCE=https://your-auth0-api-audience
+ ```
+Then run:
+```bash
+node server.js
+```
+---
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## 🔐 Auth0 Setup Guide
+1. Go to <a href="https://manage.auth0.com/">Auth0 Dashboard</a>
+2. Create a Single Page App
+3. Add the following:
+  
+- Allowed Callback URLs:
+https://habits-tracker-app.netlify.app/callback
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- Allowed Web Origins:
+https://habits-tracker-app.netlify.app
 
-### `npm run eject`
+- Allowed Logout URLs:
+https://habits-tracker-app.netlify.app
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+---
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## 📂 Project Structure
+```bash
+habit-tracker/
+│
+├── backend/               # Node.js + Express API
+│   ├── controllers/
+│   ├── middwave/
+│   ├── model/
+│   ├── routes/
+│   └── server.js
+│
+├── frontend/              # React App
+│   ├── public/
+│   └── src/
+│   └── .env
+│   └── src/
+├── README.md
+└── .gitignore
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+---
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## 🌍 Deployment
+**Frontend on Netlify**
+<ol>
+<li>Push the React project to GitHub.</li>
+<li>In Netlify: </li>
+  - Connect GitHub repo
+  - Set build command: npm run build
+  - Set publish directory: build
+  - Add the frontend .env variables in Netlify UI
+<li>Add _redirects file in public/ folder:</li>
+  </ol>
+  
+```bash
+/*  /index.html  200
+```
+<br>
 
-## Learn More
+**Backend on Render**
+<ol>
+<li>Push the backend folder to GitHub.</li>
+<li>Create a new web service on Render.</li>
+<li>Set start command: node server.js </li>
+<li>Add environment variable MONGODB_LINK</li>
+<li>Allow CORS from Netlify’s deployed frontend URL</li>
+</ol>
+<br>
+Make sure your frontend .env references the Render URL in REACT_APP_API_URL.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+---
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## 🙌 Acknowledgments
+- Auth0
+- MongoDB
+- Render
+- Netlify
 
-### Code Splitting
+  ---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+<br><h2> 📬 Contact </h2>
+<p>Feel free to reach out if you want to collaborate, have questions, or just want to connect! </p><br>
+<ul>
+  <li>LinkedIn: <a href="https://www.linkedin.com/in/olga-kozlova-25464892/">https://www.linkedin.com/in/olga-kozlova-25464892/</a></li>
+  <li>Email: <a href="mailto:norgaardov@gmail.com">norgaardov@gmail.com</a></li>
+  <li>Instagram: <a href="https://www.instagram.com/kozlova_olgav/">Olga</a> </li>
+</ul>
