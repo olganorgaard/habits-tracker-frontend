@@ -9,10 +9,7 @@ import '../styles/navbar.css';
 const Navbar = () => {
   const { isAuthenticated } = useAuth0();
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
-
   const toggleMenu = () => setMobileMenuOpen(!isMobileMenuOpen);
-
-
   return (
      <nav className="navbar">
       <div className="nav-logo">

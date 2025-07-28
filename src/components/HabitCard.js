@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import '../styles/habitCard.css';
 import Swal from 'sweetalert2';
 
