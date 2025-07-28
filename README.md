@@ -1,7 +1,7 @@
 # 🧠 Habit Tracker App
 
 YourHabit is a simple and intuitive habit tracker app that helps you build better routines, stay consistent, and reach your goals. Track daily habits, visualize progress, and stay motivated—all in one clean, easy-to-use dashboard.
-Live Demo 👉 [https://habits-tracker-app.netlify.app](https://habits-tracker-app.netlify.app)
+<p>Live Demo 👉 [https://habits-tracker-app.netlify.app](https://habits-tracker-app.netlify.app)</p>
 
 ---
 
@@ -120,10 +120,12 @@ habit-tracker/
 <ol>
 <li>Push the React project to GitHub.</li>
 <li>In Netlify: </li>
-  - Connect GitHub repo
-  - Set build command: npm run build
-  - Set publish directory: build
-  - Add the frontend .env variables in Netlify UI
+   <ul>
+  <li>Connect GitHub repo</li>
+  <li>Set build command: npm run build</li>
+  <li>Set publish directory: build</li>
+  <li>Add the frontend .env variables in Netlify UI</li>
+   </ul>
 <li>Add _redirects file in public/ folder:</li>
   </ol>
   
@@ -151,7 +153,7 @@ Make sure your frontend .env references the Render URL in REACT_APP_API_URL.
 - Render
 - Netlify
 
-  ---
+---
 
 <br><h2> 📬 Contact </h2>
 <p>Feel free to reach out if you want to collaborate, have questions, or just want to connect! </p><br>
