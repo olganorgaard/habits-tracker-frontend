@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback, useContext } from 'react';
+import { useEffect, useState, useCallback, useContext, useRef, useLayoutEffect } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 import habitService from '../services/habitService';
 import HabitCard from '../components/HabitCard';
@@ -7,7 +7,6 @@ import './styles/dashboard.css';
 import './styles/header.css';
 import Swal from 'sweetalert2';
 import { HabitFormContext } from '../context/HabitFormContext';
-import { useRef, useLayoutEffect } from 'react';
 import gsap from 'gsap';
 
 const Dashboard = () => {
@@ -16,6 +15,7 @@ const Dashboard = () => {
   const [form, setForm] = useState({ name: '', goal: 1 });
   const [loading, setLoading] = useState(true);
   const { prefill, setPrefill } = useContext(HabitFormContext);
+  const listRef = useRef(null);
 
   const fetchHabits = useCallback(async () => {
     try {
@@ -82,20 +82,19 @@ const Dashboard = () => {
     await habitService.deleteHabit(token, id);
     fetchHabits();
   };
-  const listRef = useRef(null);
 
-useLayoutEffect(() => {
-  if (habits.length > 0) {
-    gsap.from(listRef.current.children, {
-      opacity: 0,
-      y: 20,
-      duration: 0.5,
-      stagger: 0.1,
-    });
-  }
-}, [habits]);
+  useLayoutEffect(() => {
+    if (habits.length > 0 && listRef.current) {
+      gsap.from(listRef.current.children, {
+        opacity: 0,
+        y: 20,
+        duration: 0.5,
+        stagger: 0.1,
+      });
+    }
+  }, [habits]);
 
-  // Non-authenticated UI
+  // UI for unauthorized users
   if (!isAuthenticated) {
     return (
       <div className="dashboard-container">
@@ -118,7 +117,7 @@ useLayoutEffect(() => {
           </button>
 
           <h3 className="preview-title">Example Habits:</h3>
-          <div className="habit-list" ref={listRef}>
+          <div className="habit-list">
             <HabitCard habit={{ name: '💧 Drink Water', goal: 7, history: [] }} preview />
             <HabitCard habit={{ name: '📖 Read 10 Pages', goal: 5, history: [] }} preview />
             <HabitCard habit={{ name: '🚶 Walk 5,000 Steps', goal: 6, history: [] }} preview />
@@ -130,6 +129,7 @@ useLayoutEffect(() => {
 
   if (loading) return <Spinner />;
 
+  // UI for authorized users
   return (
     <div>
       <div className="header">
@@ -160,7 +160,7 @@ useLayoutEffect(() => {
             <button onClick={handleAdd}>Add Habit</button>
           </div>
 
-          <div className="habit-list">
+          <div className="habit-list" ref={listRef}>
             {habits.length === 0 ? (
               <p className="empty-message">No habits yet. Add one above!</p>
             ) : (

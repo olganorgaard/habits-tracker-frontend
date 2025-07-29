@@ -2,13 +2,13 @@ import { useState } from 'react';
 import '../styles/habitCard.css';
 import Swal from 'sweetalert2';
 
-const HabitCard = ({ habit, onCheck, onEdit, onDelete, preview = false }) => {
+const HabitCard = ({ habit = {}, onCheck, onEdit, onDelete, preview = false }) => {
   const [isEditing, setIsEditing] = useState(false);
-  const [editForm, setEditForm] = useState({ name: habit.name, goal: habit.goal });
+  const [editForm, setEditForm] = useState({ name: habit.name || '', goal: habit.goal || 1 });
 
   const completedToday = habit.history?.some(
     (entry) => entry.date === new Date().toISOString().split('T')[0]
-  );
+  ) ?? false;
 
   const handleSave = () => {
     if (!editForm.name.trim()) {
@@ -21,9 +21,18 @@ const HabitCard = ({ habit, onCheck, onEdit, onDelete, preview = false }) => {
       return;
     }
 
-    onEdit(habit._id, editForm.name, editForm.goal);
+    if (editForm.goal < 1) {
+      Swal.fire('Goal must be at least 1 day.');
+      return;
+    }
+
+    if (onEdit) {
+      onEdit(habit._id, editForm.name, editForm.goal);
+    }
     setIsEditing(false);
   };
+
+  if (!habit) return null;
 
   return (
     <div className={`habit-card ${preview ? 'preview-card' : ''}`}>
@@ -38,14 +47,21 @@ const HabitCard = ({ habit, onCheck, onEdit, onDelete, preview = false }) => {
           />
           <input
             type="number"
+            min={1}
             value={editForm.goal}
-            onChange={(e) => setEditForm({ ...editForm, goal: Number(e.target.value) })}
+            onChange={(e) =>
+              setEditForm({ ...editForm, goal: Math.max(1, Number(e.target.value)) })
+            }
             placeholder="Goal (days)"
             disabled={preview}
           />
           <div className="card-buttons">
-            <button onClick={handleSave} className="check" disabled={preview}>Save</button>
-            <button onClick={() => setIsEditing(false)} className="delete" disabled={preview}>Cancel</button>
+            <button onClick={handleSave} className="check" disabled={preview}>
+              Save
+            </button>
+            <button onClick={() => setIsEditing(false)} className="delete" disabled={preview}>
+              Cancel
+            </button>
           </div>
         </div>
       ) : (
@@ -56,7 +72,7 @@ const HabitCard = ({ habit, onCheck, onEdit, onDelete, preview = false }) => {
           <div className="card-buttons">
             <button
               className="check"
-              onClick={() => onCheck(habit._id)}
+              onClick={() => onCheck && onCheck(habit._id)}
               disabled={completedToday || preview}
             >
               {completedToday ? 'Already Done' : 'Mark Complete'}
@@ -70,7 +86,7 @@ const HabitCard = ({ habit, onCheck, onEdit, onDelete, preview = false }) => {
             </button>
             <button
               className="delete"
-              onClick={() => onDelete(habit._id)}
+              onClick={() => onDelete && onDelete(habit._id)}
               disabled={preview}
             >
               Delete
