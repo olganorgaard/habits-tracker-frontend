@@ -12,7 +12,6 @@ import './styles/header.css';
 
 const Home = () => {
   const headerRef = useRef(null);
-
   useLayoutEffect(() => {
   gsap.from(headerRef.current, {
     y: -100,
