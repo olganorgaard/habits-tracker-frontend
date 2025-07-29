@@ -11,6 +11,17 @@ import './styles/home.css';
 import './styles/header.css';
 
 const Home = () => {
+  const headerRef = useRef(null);
+
+  useLayoutEffect(() => {
+  gsap.from(headerRef.current, {
+    y: -100,
+    opacity: 0,
+    duration: 1,
+    ease: 'power3.out',
+  });
+}, []);
+
   const { isLoading, isAuthenticated, user, getAccessTokenSilently } = useAuth0();
   const [habits, setHabits] = useState([]);
   const { setPrefill } = useContext(HabitFormContext);
@@ -51,17 +62,6 @@ const Home = () => {
     setPrefill(habit);
     navigate('/dashboard');
   };
-
-  const headerRef = useRef(null);
-
-useLayoutEffect(() => {
-  gsap.from(headerRef.current, {
-    y: -100,
-    opacity: 0,
-    duration: 1,
-    ease: 'power3.out',
-  });
-}, []);
 
   return (
     <div>
