@@ -7,6 +7,8 @@ import './styles/dashboard.css';
 import './styles/header.css';
 import Swal from 'sweetalert2';
 import { HabitFormContext } from '../context/HabitFormContext';
+import { useRef, useLayoutEffect } from 'react';
+import gsap from 'gsap';
 
 const Dashboard = () => {
   const { user, getAccessTokenSilently, isAuthenticated, loginWithRedirect } = useAuth0();
@@ -80,6 +82,18 @@ const Dashboard = () => {
     await habitService.deleteHabit(token, id);
     fetchHabits();
   };
+  const listRef = useRef(null);
+
+useLayoutEffect(() => {
+  if (habits.length > 0) {
+    gsap.from(listRef.current.children, {
+      opacity: 0,
+      y: 20,
+      duration: 0.5,
+      stagger: 0.1,
+    });
+  }
+}, [habits]);
 
   // Non-authenticated UI
   if (!isAuthenticated) {
@@ -104,7 +118,7 @@ const Dashboard = () => {
           </button>
 
           <h3 className="preview-title">Example Habits:</h3>
-          <div className="habit-list">
+          <div className="habit-list" ref={listRef}>
             <HabitCard habit={{ name: '💧 Drink Water', goal: 7, history: [] }} preview />
             <HabitCard habit={{ name: '📖 Read 10 Pages', goal: 5, history: [] }} preview />
             <HabitCard habit={{ name: '🚶 Walk 5,000 Steps', goal: 6, history: [] }} preview />

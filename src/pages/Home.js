@@ -4,6 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import { HabitFormContext } from '../context/HabitFormContext';
 import habitService from '../services/habitService';
 import Spinner from '../components/Spinner';
+import gsap from 'gsap';
+import { useRef, useLayoutEffect } from 'react';
 
 import './styles/home.css';
 import './styles/header.css';
@@ -50,9 +52,20 @@ const Home = () => {
     navigate('/dashboard');
   };
 
+  const headerRef = useRef(null);
+
+useLayoutEffect(() => {
+  gsap.from(headerRef.current, {
+    y: -100,
+    opacity: 0,
+    duration: 1,
+    ease: 'power3.out',
+  });
+}, []);
+
   return (
     <div>
-      <div className="header">
+      <div className="header" ref={headerRef}>
         <h1>Habit Tracker</h1>
         <p>
           “Sow a thought, reap an action; sow an action, reap a habit; sow a habit,

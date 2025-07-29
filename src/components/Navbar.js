@@ -4,14 +4,25 @@ import { useAuth0 } from '@auth0/auth0-react';
 import LoginButton from './LoginButton';
 import LogoutButton from './LogoutButton';
 import '../styles/navbar.css';
-
+import { useEffect, useRef } from 'react';
+import gsap from 'gsap';
 
 const Navbar = () => {
   const { isAuthenticated } = useAuth0();
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
   const toggleMenu = () => setMobileMenuOpen(!isMobileMenuOpen);
+  const navRef = useRef(null);
+
+useEffect(() => {
+  gsap.from(navRef.current, {
+    y: -50,
+    opacity: 0,
+    duration: 0.8,
+    ease: 'power3.out',
+  });
+}, []);
   return (
-     <nav className="navbar">
+     <nav className="navbar" ref={navRef}>
       <div className="nav-logo">
         <Link to="/">🌿 YourHabits</Link>
       </div>
